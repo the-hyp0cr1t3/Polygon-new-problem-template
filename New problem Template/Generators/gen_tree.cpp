@@ -1,5 +1,7 @@
 #include "testlib.h"
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <numeric>
 using namespace std;
 
 vector<pair<int, int>> get_edges_random(int n);
