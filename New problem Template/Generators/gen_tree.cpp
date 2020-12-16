@@ -41,6 +41,7 @@ vector<pair<int, int>> get_edges_random(int n) {
     return edges;
 }
 
+// k = 1 for chain, k = n-1 for star
 vector<pair<int, int>> get_edges_kary(int n, int k) {
     vector<int> perm(n);
     iota(perm.begin(), perm.end(), 0);
