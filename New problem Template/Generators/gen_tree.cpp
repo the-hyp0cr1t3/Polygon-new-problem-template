@@ -3,7 +3,6 @@
 #include <vector>
 #include <numeric>
 using namespace std;
-
 enum InputFormat { Edges, Parents };
 
 template<InputFormat inp = Edges>
