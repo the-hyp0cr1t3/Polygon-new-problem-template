@@ -6,7 +6,7 @@ using namespace std;
 
 enum InputFormat { Edges, Parents };
 
-template<InputFormat inp>
+template<InputFormat inp = Edges>
 auto gen_tree_random(int n) {
     vector<int> perm(n);
     iota(perm.begin(), perm.end(), 0);
@@ -33,7 +33,7 @@ auto gen_tree_random(int n) {
 }
 
 // k = 1 for chain, k = n-1 for star
-template<InputFormat inp>
+template<InputFormat inp = Edges>
 auto gen_tree_kary(int n, int k) {
     vector<int> perm(n);
     iota(perm.begin(), perm.end(), 0);
