@@ -71,3 +71,8 @@ int main(int argc, char* argv[]) {
             cout << u << ' ' << v << endl;
     }
 }
+
+/*
+gen_tree 10 1 5 32152 > $
+// generates a single test case containing 10 cases with n in the range 1-5, 32152 is a random number
+*/
