@@ -16,18 +16,18 @@ auto gen_tree_random(int n) {
     for(int i = 1; i < n; i++)
         p[i] = rnd.wnext(i, elongation);
 
-    if constexpr(inp == Parents) { // ----- Parents -----
+    if constexpr(inp == Parents) {  // ----- Parents -----
         vector<int> par(n, -1);
         for(int i = 1; i < n; i++)
             par[perm[i]] = perm[p[i]] + 1;
         return par;
-    } else { // ----- Edges -----
+    } else {                        // ----- Edges -------
         vector<pair<int, int>> edges; edges.reserve(n-1);
         for(int i = 1; i < n; i++)
-            if(rnd.next(2)) edges.emplace_back(perm[i]+1, perm[p[i]]+1);
-            else edges.emplace_back(perm[p[i]]+1, perm[i]+1);
-        shuffle(edges.begin(), edges.end());
-        return edges;        
+            edges.push_back(rnd.next(2)?
+                pair{perm[i] + 1, perm[p[i]] + 1}
+                    : pair{perm[p[i]] + 1, perm[i] + 1});
+        return shuffle(edges.begin(), edges.end()), edges;
     }
 }
 
@@ -38,20 +38,20 @@ auto gen_tree_kary(int n, int k) {
     iota(perm.begin(), perm.end(), 0);
     shuffle(perm.begin(), perm.end());
 
-    if constexpr(inp == Parents) { // ----- Parents -----
+    if constexpr(inp == Parents) {  // ----- Parents -----
         vector<int> par(n, -1);
         for(int i = 0, j = 1; j < n; i++, j+=k)
             for(int id = j; id < min(n, j+k); id++)
                 par[perm[id]] = perm[i] + 1;
         return par;        
-    } else { // ----- Edges -----
+    } else {                        // ----- Edges -------
         vector<pair<int, int>> edges; edges.reserve(n-1);
         for(int i = 0, j = 1; j < n; i++, j+=k)
             for(int id = j; id < min(n, j+k); id++)
-                if(rnd.next(2)) edges.emplace_back(perm[i], perm[id]);
-                else edges.emplace_back(perm[id], perm[i]);
-        shuffle(edges.begin(), edges.end());
-        return edges;        
+                edges.push_back(rnd.next(2)?
+                    pair{perm[i] + 1, perm[id] + 1}
+                        : pair{perm[id] + 1, perm[i] + 1});
+        return shuffle(edges.begin(), edges.end()), edges;
     }
 }
 
